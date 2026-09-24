@@ -1,0 +1,18 @@
+<section class="horarios-container">
+  <h2>Elegí el horario de tu función</h2>
+  
+  @if (loading()) {
+    <p class="loading">Cargando la cartelera...</p>
+  } @else {
+    <div class="grilla-horarios">
+      @for (funcion of funciones(); track funcion.id) {
+        <button class="badge-funcion clickeable" [routerLink]="['/reserva', funcion.id]">
+          <span class="fecha-hora">{{ funcion.hora.substring(0, 5) }}hs</span>
+          <span class="tags">{{ funcion.idioma }} | {{ funcion.formato }}</span>
+        </button>
+      } @empty {
+        <p>No hay funciones disponibles.</p>
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,19 @@
+<section class="cartelera">
+  <h2>Películas Completa</h2>
+  
+  @if (loading()) {
+    <p>Cargando cartelera...</p>
+  } @else {
+    <div class="grid-peliculas">
+      @for (pelicula of peliculasFiltradas(); track pelicula.id) {
+        <article class="pelicula-card" [routerLink]="['/pelicula', pelicula.id]">
+          <img [src]="pelicula.poster_url" [alt]="pelicula.titulo">
+          <h3>{{ pelicula.titulo }}</h3>
+          <p>{{ pelicula.duracion_minutos }} min</p>
+        </article>
+      } @empty {
+        <p>No hay películas en cartelera en este momento.</p>
+      }
+    </div>
+  }
+</section>

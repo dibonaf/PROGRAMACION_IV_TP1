@@ -1,0 +1,40 @@
+<section class="contenedor">
+  <div class="grilla-candy">
+    @for (producto of productos(); track producto.id) {
+      <article class="candy-card">
+        <img [src]="producto.imagen_url" [alt]="producto.nombre">
+        <div class="candy-info">
+          <h3>{{ producto.nombre }}</h3>
+          <p class="descripcion">{{ producto.descripcion }}</p>
+          <p class="precio">${{ producto.precio }}</p>
+          <button class="btn-agregar" (click)="agregar(producto)">
+            @if (getCantidad(producto.id) > 0) {
+              Agregar otro ({{ getCantidad(producto.id) }})
+            } @else {
+              Agregar al carrito
+            }
+          </button>
+        </div>
+      </article>
+    } @empty {
+      <p>No hay productos disponibles en este momento.</p>
+    }
+  </div>
+</section>
+
+@if (itemsEnCarrito().length > 0 || tieneEntradas()) {
+  <div class="resumen-flotante">
+    <div class="info-resumen">
+      <p>Productos en el carrito: {{ itemsEnCarrito().length }}</p>
+      @if (itemsEnCarrito().length > 0) {
+        <button class="btn-secundario" (click)="limpiarCandy()">Vaciar combos</button>
+      }
+    </div>
+    
+    @if (itemsEnCarrito().length > 0) {
+      <button class="btn-continuar" (click)="irAlPago()">Ir a Pagar</button>
+    } @else if (tieneEntradas()) {
+      <button class="btn-saltar" (click)="irAlPago()">Continuar sin Candy Bar</button>
+    }
+  </div>
+}

@@ -1,0 +1,94 @@
+<section class="checkout-container">
+  @if (!compraFinalizada()) {
+    <h2>Resumen de tu Compra</h2>
+    
+    <div class="resumen-grid">
+      <div class="detalle-compra">
+        <h3>Entradas</h3>
+        <ul>
+          @for (butaca of butacas(); track butaca.id) {
+            <li>
+              <span>Fila {{ butaca.fila }} - Asiento {{ butaca.numero }} ({{ butaca.tipo }})</span>
+              <span>${{ butaca.precio }}</span>
+            </li>
+          } @empty {
+            <li class="vacio">No hay entradas seleccionadas.</li>
+          }
+        </ul>
+        <p class="subtotal">Subtotal Entradas: ${{ subtotalButacas() }}</p>
+
+        <h3>Candy Bar</h3>
+        <ul>
+          @for (item of candy(); track item.producto.id) {
+            <li>
+              <span>{{ item.cantidad }}x {{ item.producto.nombre }}</span>
+              <span>${{ item.producto.precio * item.cantidad }}</span>
+            </li>
+          } @empty {
+            <li class="vacio">No agregaste productos del Candy Bar.</li>
+          }
+        </ul>
+        <p class="subtotal">Subtotal Candy: ${{ subtotalCandy() }}</p>
+      </div>
+
+      <div class="pago-panel">
+        <h3>Total a Pagar</h3>
+        
+        <div class="monto-bruto">Subtotal: ${{ subtotal() }}</div>
+
+        <div class="cupon-section">
+          <input #cuponInput type="text" placeholder="Ingresá tu cupón">
+          <button (click)="aplicarCupon(cuponInput.value)">Aplicar</button>
+        </div>
+
+        @if (cuponAplicado()) {
+          <p class="descuento-exito">¡Cupón aplicado! (-20%)</p>
+        }
+
+        <div class="monto-neto">
+          Total Final: <span>${{ totalFinal() }}</span>
+        </div>
+
+        <!-- Sección de Pago Simulado -->
+        <div class="tarjeta-pago-container">
+          <h3>Datos de Pago</h3>
+          <div class="form-grupo">
+            <label>Número de Tarjeta</label>
+            <input type="text" placeholder="0000 1111 2222 3333" maxlength="19">
+          </div>
+          <div class="form-fila">
+            <div class="form-grupo">
+              <label>Vencimiento</label>
+              <input type="text" placeholder="MM/AA" maxlength="5">
+            </div>
+            <div class="form-grupo">
+              <label>CVC</label>
+              <input type="password" placeholder="***" maxlength="3">
+            </div>
+          </div>
+          
+          <button class="btn-pagar" 
+                  (click)="simularPago()" 
+                  [disabled]="procesandoPago()">
+            @if (procesandoPago()) {
+              Procesando pago con el banco...
+            } @else {
+              Confirmar Pago de ${{ totalFinal() }}
+            }
+          </button>
+        </div>
+
+      </div>
+    </div>
+  } @else {
+    <div class="ticket-exito">
+      <h2>¡Compra Confirmada! 🍿</h2>
+      <p>Presentá este código QR en la entrada del cine:</p>
+      <div class="qr-box">
+        <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=UTN-' + totalFinal()" alt="QR de acceso">
+      </div>
+      <p class="mensaje-final">¡Que disfrutes la función!</p>
+      <button class="btn-volver" (click)="volverAlInicio()">Volver al Inicio</button>
+    </div>
+  }
+</section>

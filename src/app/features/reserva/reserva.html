@@ -1,0 +1,82 @@
+<section class="reserva-container">
+  <h2>Selección de Butacas</h2>
+  
+  <div class="pantalla-escenario">
+    <div class="pantalla-curva"></div>
+    <p>PANTALLA</p>
+  </div>
+
+  <div class="mapa-sala">
+    @for (fila of filasCine(); track fila.letra) {
+      <div class="fila-cine">
+        <span class="letra-fila">{{ fila.letra }}</span>
+        
+        <div class="contenedor-butacas">
+          <!-- Bloque Izquierdo -->
+          <div class="bloque-lateral">
+            @for (butaca of fila.butacas; track butaca.id) {
+              @if (butaca.bloque === 0) {
+                @if (butaca.tipo === 'ESPACIO') {
+                  <div class="espacio-vacio"></div>
+                } @else {
+                  <button class="butaca {{ butaca.estado | lowercase }} {{ butaca.tipo | lowercase }}" 
+                          (click)="toggleButaca(butaca)"
+                          [class.seleccionada]="estaSeleccionada(butaca.id)"
+                          [disabled]="butaca.estado === 'OCUPADA'">
+                    {{ butaca.numero }}
+                  </button>
+                }
+              }
+            }
+          </div>
+
+          <!-- Bloque Central -->
+          <div class="bloque-central">
+            @for (butaca of fila.butacas; track butaca.id) {
+              @if (butaca.bloque === 1) {
+                @if (butaca.tipo === 'ESPACIO') {
+                  <div class="espacio-vacio"></div>
+                } @else {
+                  <button class="butaca {{ butaca.estado | lowercase }} {{ butaca.tipo | lowercase }}" 
+                          (click)="toggleButaca(butaca)"
+                          [class.seleccionada]="estaSeleccionada(butaca.id)"
+                          [disabled]="butaca.estado === 'OCUPADA'">
+                    {{ butaca.numero }}
+                  </button>
+                }
+              }
+            }
+          </div>
+
+          <!-- Bloque Derecho -->
+          <div class="bloque-lateral">
+            @for (butaca of fila.butacas; track butaca.id) {
+              @if (butaca.bloque === 2) {
+                @if (butaca.tipo === 'ESPACIO') {
+                  <div class="espacio-vacio"></div>
+                } @else {
+                  <button class="butaca {{ butaca.estado | lowercase }} {{ butaca.tipo | lowercase }}" 
+                          (click)="toggleButaca(butaca)"
+                          [class.seleccionada]="estaSeleccionada(butaca.id)"
+                          [disabled]="butaca.estado === 'OCUPADA'">
+                    {{ butaca.numero }}
+                  </button>
+                }
+              }
+            }
+          </div>
+        </div>
+        
+        <span class="letra-fila">{{ fila.letra }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Resumen de compra temporal -->
+  @if (butacasSeleccionadas().length > 0) {
+    <div class="resumen-flotante">
+      <p>Butacas seleccionadas: {{ butacasSeleccionadas().length }}</p>
+      <button class="btn-continuar" (click)="continuarCompra()">Continuar con Candy Bar</button>
+    </div>
+  }
+</section>

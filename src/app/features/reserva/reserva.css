@@ -1,0 +1,169 @@
+.reserva-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 150px 20px; 
+  color: #fff;
+}
+
+.pantalla-escenario {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.pantalla-escenario p {
+  font-size: 0.7rem;
+  letter-spacing: 5px;
+  color: #64748b;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.pantalla-curva {
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(212, 175, 55, 0.9), rgba(212, 175, 55, 0.1));
+  border-radius: 50% / 100% 100% 0 0;
+  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.35);
+  margin-bottom: 0.5rem;
+}
+
+.mapa-sala {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0;
+  max-width: 1000px;
+  align-items: center;
+}
+
+.fila-cine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.letra-fila {
+  font-weight: bold;
+  color: #888;
+  width: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.contenedor-butacas {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.bloque-lateral, .bloque-central {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+/* Estilo base unificado para todas las butacas */
+.butaca {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background-color: #1e293b;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.butaca:hover:not(.ocupada):not(:disabled) {
+  transform: scale(1.1);
+  border-color: #e50914;
+}
+
+/* Tipos específicos de butacas */
+.butaca.estandar {
+  background-color: #1e293b;
+}
+
+.butaca.vip {
+  border-color: var(--cine-dorado, #d4af37);
+  color: var(--cine-dorado, #d4af37);
+  background-color: rgba(212, 175, 55, 0.1);
+}
+
+.butaca.accesible {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background-color: rgba(56, 189, 248, 0.1);
+}
+
+/* Estados de selección y bloqueo */
+.butaca.seleccionada {
+  background-color: #e50914 !important;
+  border-color: #ff1e1e !important;
+  color: white !important;
+}
+
+.butaca.vip.seleccionada {
+  background-color: var(--cine-dorado, #d4af37) !important;
+  color: black !important;
+}
+
+.butaca.accesible.seleccionada {
+  background-color: #38bdf8 !important;
+  color: black !important;
+}
+
+.butaca.ocupada {
+  background-color: #151b26 !important;
+  border-color: #1e293b !important;
+  color: #475569 !important;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Espacios vacíos simétricos para las filas J y K */
+.espacio-vacio {
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
+
+/* Barra flotante inferior de resumen */
+.resumen-flotante {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(11, 15, 25, 0.95);
+  border-top: 1px solid var(--cine-dorado, #d4af37);
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.btn-continuar {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-continuar:hover {
+  background-color: #b20710;
+}

@@ -1,0 +1,97 @@
+<section class="auth-container">
+  <div class="auth-box">
+    <h2>{{ modoRegistro() ? 'Crear Cuenta' : 'Iniciar Sesión' }}</h2>
+    
+    @if (mensajeError()) {
+      <div class="alerta-error">{{ mensajeError() }}</div>
+    }
+
+    @if (!modoRegistro()) {
+      <form [formRoot]="loginForm" (submit)="ejecutarAccion($event)">
+        <div class="form-grupo">
+          <label>Email</label>
+          <input [formField]="loginForm.email" type="email">
+        </div>
+        
+        <div class="form-grupo">
+          <label>Contraseña</label>
+          <input [formField]="loginForm.password" type="password">
+        </div>
+
+        <button type="submit" class="btn-principal" [disabled]="procesando()">
+          {{ procesando() ? 'Ingresando...' : 'Entrar' }}
+        </button>
+      </form>
+    } @else {
+      <form [formRoot]="registroForm" (submit)="ejecutarAccion($event)">
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label>Nombre</label>
+            <input [formField]="registroForm.nombre" type="text">
+          </div>
+          <div class="form-grupo">
+            <label>Apellido</label>
+            <input [formField]="registroForm.apellido" type="text">
+          </div>
+        </div>
+
+        <div class="form-grupo">
+          <label>Email</label>
+          <input [formField]="registroForm.email" type="email">
+        </div>
+        
+        <div class="form-grupo">
+          <label>Contraseña</label>
+          <input [formField]="registroForm.password" type="password">
+        </div>
+
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label>Nacimiento</label>
+            <input [formField]="registroForm.fecha_nacimiento" type="date">
+          </div>
+          <div class="form-grupo">
+            <label>Tipo de Sangre</label>
+            <select [formField]="registroForm.tipo_sangre">
+              <option value="">Seleccionar...</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-fila">
+          <div class="form-grupo">
+            <label>Color de Ojos</label>
+            <input [formField]="registroForm.color_ojos" type="text">
+          </div>
+          <div class="form-grupo">
+            <label>Días Vacaciones</label>
+            <input [formField]="registroForm.dias_vacaciones" type="number">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-principal" [disabled]="procesando()">
+          {{ procesando() ? 'Registrando...' : 'Crear Cuenta' }}
+        </button>
+      </form>
+    }
+
+    <div class="auth-separador">o ingresá con</div>
+    
+    <button class="btn-github" (click)="loginGitHub()" type="button">
+      GitHub
+    </button>
+
+    <p class="toggle-text">
+      {{ modoRegistro() ? '¿Ya tenés cuenta?' : '¿No tenés cuenta?' }}
+      <a (click)="toggleModo()">{{ modoRegistro() ? 'Iniciá sesión acá' : 'Registrate gratis' }}</a>
+    </p>
+  </div>
+</section>

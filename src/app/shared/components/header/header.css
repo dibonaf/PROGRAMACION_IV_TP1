@@ -1,0 +1,113 @@
+.cine-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--bg-surface);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo h1 {
+  margin: 0;
+  color: var(--cine-rojo);
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.navegacion {
+  display: flex;
+  gap: 2rem;
+}
+
+.navegacion a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navegacion a:hover {
+  color: var(--cine-dorado);
+}
+
+.buscador input {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #374151;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.buscador input:focus {
+  border-color: var(--cine-dorado);
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  color: var(--cine-dorado);
+  font-weight: 600;
+}
+
+.btn-login {
+  background-color: #e50914; /* Rojo Cine */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-login:hover {
+  background-color: #b20710;
+}
+
+.header-auth-section {
+  display: flex;
+  align-items: center;
+}
+
+.usuario-logueado {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.saludo {
+  color: var(--cine-dorado, #d4af37);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.btn-logout {
+  background-color: transparent;
+  color: #94a3b8;
+  border: 1px solid #475569;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #334155;
+  color: white;
+}
