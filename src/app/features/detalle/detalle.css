@@ -1,0 +1,125 @@
+.detalle-hero {
+  position: relative;
+  width: 100%;
+  height: 60vh; 
+  min-height: 450px;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(11, 15, 25, 1) 15%, rgba(11, 15, 25, 0.8) 50%, rgba(11, 15, 25, 0.1) 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 4rem;
+}
+
+.info-pelicula {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1100px;
+}
+
+.poster-detalle {
+  width: 260px;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--cine-dorado);
+}
+
+.datos {
+  max-width: 600px;
+}
+
+.datos h2 {
+  font-size: 3rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.meta {
+  font-size: 1.1rem;
+  color: var(--cine-dorado);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.sinopsis {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.btn-comprar {
+  background-color: var(--cine-rojo);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-comprar:hover {
+  background-color: #b90710;
+  transform: scale(1.05);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--cine-dorado);
+  margin-top: 4rem;
+}
+
+.funciones-info {
+  margin-bottom: 2rem;
+}
+
+.lista-funciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.badge-funcion {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fecha-hora {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tags {
+  color: var(--cine-dorado);
+  font-size: 0.85rem;
+}
+
+.sin-funciones {
+  color: var(--text-secondary);
+  font-style: italic;
+}

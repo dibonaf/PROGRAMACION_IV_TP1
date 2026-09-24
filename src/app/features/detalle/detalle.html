@@ -1,0 +1,37 @@
+@if (pelicula(); as p) {
+  <div class="detalle-hero" [style.backgroundImage]="'url(' + p.poster_url + ')'">
+    <div class="overlay">
+      <div class="info-pelicula">
+        <img [src]="p.poster_url" [alt]="p.titulo" class="poster-detalle">
+        <div class="datos">
+          <h2>{{ p.titulo }}</h2>
+          <p class="meta">{{ p.duracion_minutos }} min | Géneros: {{ p.generos.join(', ') }}</p>
+          <p class="sinopsis">{{ p.sinopsis }}</p>
+          
+          <div class="funciones-info">
+            <p class="meta">Horarios programados:</p>
+            
+            @if (loadingFunciones()) {
+              <p class="loading">Buscando horarios...</p>
+            }
+
+            <div class="lista-funciones">
+              @for (funcion of funciones(); track funcion.id) {
+                <div class="badge-funcion">
+                  <span class="fecha-hora">{{ funcion.fecha }} | {{ funcion.hora.substring(0, 5) }}hs</span>
+                  <span class="tags">{{ funcion.idioma }} - {{ funcion.formato }}</span>
+                </div>
+              } @empty {
+                <p class="sin-funciones">No hay funciones programadas para esta película en este momento.</p>
+              }
+            </div>
+          </div>
+          
+          <button class="btn-comprar" [routerLink]="['/reserva', p.id]">Comprar Entradas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <p class="loading">Cargando la magia del cine...</p>
+}

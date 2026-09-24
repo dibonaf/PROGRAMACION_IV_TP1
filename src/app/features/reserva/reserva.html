@@ -1,0 +1,71 @@
+<section class="reserva-container">
+  <h2>Selección de Butacas</h2>
+  
+  <div class="pantalla-escenario">
+    <div class="pantalla-curva"></div>
+    <p>PANTALLA</p>
+  </div>
+
+  <div class="mapa-sala">
+    @for (fila of filasCine(); track fila.letra) {
+      <div class="fila-butacas">
+        <div class="letra-fila">{{ fila.letra }}</div>
+        
+        <!-- Bloque Izquierdo -->
+        <div class="bloque-asientos">
+          @for (butaca of fila.bloqueIzq; track butaca.id) {
+            @if (butaca.tipo === 'ESPACIO') {
+              <div class="espacio-vacio"></div>
+            } @else {
+              <button 
+                class="butaca {{butaca.tipo | lowercase}} {{butaca.estado | lowercase}}"
+                (click)="toggleButaca(butaca)">
+                @if (butaca.tipo === 'ACCESIBLE') { ♿ } @else { {{ butaca.numero }} }
+              </button>
+            }
+          }
+        </div>
+
+        <!-- Bloque Central -->
+        <div class="bloque-asientos centro">
+          @for (butaca of fila.bloqueCen; track butaca.id) {
+            @if (butaca.tipo === 'ESPACIO') {
+              <div class="espacio-vacio"></div>
+            } @else {
+              <button 
+                class="butaca {{butaca.tipo | lowercase}} {{butaca.estado | lowercase}}"
+                (click)="toggleButaca(butaca)">
+                @if (butaca.tipo === 'ACCESIBLE') { ♿ } @else { {{ butaca.numero }} }
+              </button>
+            }
+          }
+        </div>
+
+        <!-- Bloque Derecho -->
+        <div class="bloque-asientos">
+          @for (butaca of fila.bloqueDer; track butaca.id) {
+            @if (butaca.tipo === 'ESPACIO') {
+              <div class="espacio-vacio"></div>
+            } @else {
+              <button 
+                class="butaca {{butaca.tipo | lowercase}} {{butaca.estado | lowercase}}"
+                (click)="toggleButaca(butaca)">
+                @if (butaca.tipo === 'ACCESIBLE') { ♿ } @else { {{ butaca.numero }} }
+              </button>
+            }
+          }
+        </div>
+
+        <div class="letra-fila">{{ fila.letra }}</div>
+      </div>
+    }
+  </div>
+
+  <!-- Resumen de compra temporal -->
+  @if (butacasSeleccionadas().length > 0) {
+    <div class="resumen-flotante">
+      <p>Butacas seleccionadas: {{ butacasSeleccionadas().length }}</p>
+      <button class="btn-continuar">Continuar con Candy Bar</button>
+    </div>
+  }
+</section>

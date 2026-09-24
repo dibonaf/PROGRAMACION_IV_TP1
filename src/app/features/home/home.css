@@ -1,0 +1,48 @@
+.cartelera h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--cine-dorado);
+  padding-left: 1rem;
+}
+
+.grid-peliculas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.pelicula-card {
+  background-color: var(--bg-surface);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.pelicula-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.pelicula-card img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-bottom: 2px solid var(--cine-rojo);
+}
+
+.pelicula-card h3 {
+  margin: 1rem 1rem 0.5rem;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pelicula-card p {
+  margin: 0 1rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}

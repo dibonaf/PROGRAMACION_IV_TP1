@@ -1,0 +1,25 @@
+<header class="cine-header">
+  <div class="logo">
+    <h1 routerLink="/" style="cursor: pointer;">Cine UTN</h1>
+  </div>
+  
+  <nav class="navegacion">
+    <a routerLink="/cartelera">Cartelera</a>
+    <a routerLink="/preventas">Preventas</a>
+    <a routerLink="/candy">Candy Bar</a>
+  </nav>
+
+  <div class="buscador">
+    <input type="text" placeholder="Buscar película o género..." (input)="onSearch($event)">
+  </div>
+  <div class="auth-section">
+    @if (usuario(); as user) {
+      <div class="user-menu">
+        <span class="user-name">Hola, {{ user.user_metadata['preferred_username'] || 'Cinéfilo' }}</span>
+        <button class="btn-logout" (click)="logout()">Salir</button>
+      </div>
+    } @else {
+      <button class="btn-login" (click)="login()">Iniciar Sesión</button>
+    }
+  </div>
+</header>

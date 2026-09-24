@@ -1,0 +1,23 @@
+<section class="contenedor">
+  <h2>Candy Bar</h2>
+  
+  @if (loading()) {
+    <p class="loading">Preparando el pochoclo...</p>
+  }
+
+  <div class="grilla-candy">
+    @for (producto of productos(); track producto.id) {
+      <article class="candy-card">
+        <img [src]="producto.imagen_url" [alt]="producto.nombre">
+        <div class="candy-info">
+          <h3>{{ producto.nombre }}</h3>
+          <p class="descripcion">{{ producto.descripcion }}</p>
+          <p class="precio">${{ producto.precio }}</p>
+          <button class="btn-agregar">Agregar al carrito</button>
+        </div>
+      </article>
+    } @empty {
+      <p>No hay productos disponibles en este momento.</p>
+    }
+  </div>
+</section>
