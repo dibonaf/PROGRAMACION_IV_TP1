@@ -15,7 +15,6 @@ export class SupabaseService {
     get client(): SupabaseClient {
         return this.supabase;
     }
-<<<<<<< HEAD
 
     async getFuncionesPorPelicula(peliculaId: number) {
         const { data, error } = await this.supabase
@@ -74,6 +73,4 @@ export class SupabaseService {
     removerCanal(canal: any) {
         this.supabase.removeChannel(canal);
     }
-=======
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 }

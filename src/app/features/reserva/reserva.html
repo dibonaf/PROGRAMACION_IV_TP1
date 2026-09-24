@@ -8,7 +8,6 @@
 
   <div class="mapa-sala">
     @for (fila of filasCine(); track fila.letra) {
-<<<<<<< HEAD
       <div class="fila-cine">
         <span class="letra-fila">{{ fila.letra }}</span>
         
@@ -69,57 +68,6 @@
         </div>
         
         <span class="letra-fila">{{ fila.letra }}</span>
-=======
-      <div class="fila-butacas">
-        <div class="letra-fila">{{ fila.letra }}</div>
-        
-        <!-- Bloque Izquierdo -->
-        <div class="bloque-asientos">
-          @for (butaca of fila.bloqueIzq; track butaca.id) {
-            @if (butaca.tipo === 'ESPACIO') {
-              <div class="espacio-vacio"></div>
-            } @else {
-              <button 
-                class="butaca {{butaca.tipo | lowercase}} {{butaca.estado | lowercase}}"
-                (click)="toggleButaca(butaca)">
-                @if (butaca.tipo === 'ACCESIBLE') { ♿ } @else { {{ butaca.numero }} }
-              </button>
-            }
-          }
-        </div>
-
-        <!-- Bloque Central -->
-        <div class="bloque-asientos centro">
-          @for (butaca of fila.bloqueCen; track butaca.id) {
-            @if (butaca.tipo === 'ESPACIO') {
-              <div class="espacio-vacio"></div>
-            } @else {
-              <button 
-                class="butaca {{butaca.tipo | lowercase}} {{butaca.estado | lowercase}}"
-                (click)="toggleButaca(butaca)">
-                @if (butaca.tipo === 'ACCESIBLE') { ♿ } @else { {{ butaca.numero }} }
-              </button>
-            }
-          }
-        </div>
-
-        <!-- Bloque Derecho -->
-        <div class="bloque-asientos">
-          @for (butaca of fila.bloqueDer; track butaca.id) {
-            @if (butaca.tipo === 'ESPACIO') {
-              <div class="espacio-vacio"></div>
-            } @else {
-              <button 
-                class="butaca {{butaca.tipo | lowercase}} {{butaca.estado | lowercase}}"
-                (click)="toggleButaca(butaca)">
-                @if (butaca.tipo === 'ACCESIBLE') { ♿ } @else { {{ butaca.numero }} }
-              </button>
-            }
-          }
-        </div>
-
-        <div class="letra-fila">{{ fila.letra }}</div>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
       </div>
     }
   </div>
@@ -128,11 +76,7 @@
   @if (butacasSeleccionadas().length > 0) {
     <div class="resumen-flotante">
       <p>Butacas seleccionadas: {{ butacasSeleccionadas().length }}</p>
-<<<<<<< HEAD
       <button class="btn-continuar" (click)="continuarCompra()">Continuar con Candy Bar</button>
-=======
-      <button class="btn-continuar">Continuar con Candy Bar</button>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
     </div>
   }
 </section>

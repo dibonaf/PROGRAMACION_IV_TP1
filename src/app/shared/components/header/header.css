@@ -64,7 +64,6 @@
   font-weight: 600;
 }
 
-<<<<<<< HEAD
 .btn-login {
   background-color: #e50914; /* Rojo Cine */
   color: white;
@@ -111,19 +110,4 @@
 .btn-logout:hover {
   background-color: #334155;
   color: white;
-=======
-.btn-login, .btn-logout {
-  background-color: var(--cine-rojo);
-  color: white;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-login:hover, .btn-logout:hover {
-  background-color: #b90710;
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 }

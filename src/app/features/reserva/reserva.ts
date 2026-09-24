@@ -1,108 +1,8 @@
-<<<<<<< HEAD
 import { Component, OnInit, OnDestroy, signal, inject, input, numberAttribute } from '@angular/core';
 import { LowerCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CarritoService } from '../../core/services/carrito.service';
 import { SupabaseService } from '../../core/services/supabase';
-=======
-/*import { Component, OnInit, signal } from "@angular/core";
-import { LowerCasePipe } from "@angular/common";
-
-type TipoButaca = 'ESTANDAR' | 'ACCESIBLE' | 'VIP';
-type EstadoButaca = 'LIBRE' | 'OCUPADA' | 'SELECCIONADA';
-
-export interface Butaca {
-  id: string;
-  fila: string;
-  numero: number;
-  tipo: TipoButaca;
-  estado: EstadoButaca;
-  precio: number;
-}
-
-interface FilaCine{
-  letra: string;
-  bloqueIzq: Butaca[];
-  bloqueCen: Butaca[];
-  bloqueDer: Butaca[];
-}
-
-@Component({
-  imports: [LowerCasePipe],
-  selector: 'app-reserva',
-  templateUrl: './reserva.html',
-  styleUrl: './reserva.css'
-})
-export class Reserva implements OnInit {
-  filasCine = signal<FilaCine[]>([]);
-  butacasSeleccionadas = signal<Butaca[]>([]);
-  
-  precioBase = 3500;
-  precioVip = 5500;
-
-  ngOnInit() {
-    this.generarMapaButacas();
-  }
-  private generarMapaButacas() {
-    const abecedario = 'ABCDEFGHIJKLMNOPQRST'.split('');
-    const mapa: FilaCine[] = [];
-
-    abecedario.forEach(letra => {
-      const esAccesible = letra === 'J' || letra === 'K';
-      const esVip = letra === 'R' || letra === 'S' || letra === 'T';
-      
-      const tipo: TipoButaca = esAccesible ? 'ACCESIBLE' : (esVip ? 'VIP' : 'ESTANDAR');
-      const precio = esVip ? this.precioVip : this.precioBase;
-
-      const cantIzq = esAccesible ? 2 : 4;
-      const cantCen = esAccesible ? 10 : 20;
-      const cantDer = esAccesible ? 2 : 4;
-
-      let numActual = 1;
-
-      const armarBloque = (cantidad: number): Butaca[] => {
-        const bloque: Butaca[] = [];
-        for (let i = 0; i < cantidad; i++) {
-          bloque.push({
-            id: `${letra}-${numActual}`,
-            fila: letra,
-            numero: numActual,
-            tipo: tipo,
-            estado: 'LIBRE',
-            precio: precio
-          });
-          numActual++;
-        }
-        return bloque;
-      };
-
-      mapa.push({
-        letra,
-        bloqueIzq: armarBloque(cantIzq),
-        bloqueCen: armarBloque(cantCen),
-        bloqueDer: armarBloque(cantDer)
-      });
-    });
-
-    this.filasCine.set(mapa);
-  }
-
-  toggleButaca(butaca: Butaca) {
-    if (butaca.estado === 'OCUPADA') return;
-
-    if (butaca.estado === 'LIBRE') {
-      butaca.estado = 'SELECCIONADA';
-      this.butacasSeleccionadas.update(b => [...b, butaca]);
-    } else {
-      butaca.estado = 'LIBRE';
-      this.butacasSeleccionadas.update(b => b.filter(item => item.id !== butaca.id));
-    }
-  }
-}*/
-
-import { Component, OnInit, signal } from '@angular/core';
-import { LowerCasePipe } from '@angular/common';
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 
 type TipoButaca = 'ESTANDAR' | 'ACCESIBLE' | 'VIP' | 'ESPACIO';
 type EstadoButaca = 'LIBRE' | 'OCUPADA' | 'SELECCIONADA';
@@ -114,22 +14,12 @@ export interface Butaca {
   tipo: TipoButaca;
   estado: EstadoButaca;
   precio: number;
-<<<<<<< HEAD
   bloque: number;
 }
 
 export interface FilaCine {
   letra: string;
   butacas: Butaca[];  
-=======
-}
-
-interface FilaCine {
-  letra: string;
-  bloqueIzq: Butaca[];
-  bloqueCen: Butaca[];
-  bloqueDer: Butaca[];
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 }
 
 @Component({
@@ -138,7 +28,6 @@ interface FilaCine {
   templateUrl: './reserva.html',
   styleUrl: './reserva.css'
 })
-<<<<<<< HEAD
 export class Reserva implements OnInit, OnDestroy {
 
   id = input.required({ transform : numberAttribute});
@@ -165,17 +54,6 @@ export class Reserva implements OnInit, OnDestroy {
     if (this.realtimeChannel) {
       this.supabaseService.removerCanal(this.realtimeChannel);
     }
-=======
-export class Reserva implements OnInit {
-  filasCine = signal<FilaCine[]>([]);
-  butacasSeleccionadas = signal<Butaca[]>([]);
-  
-  precioBase = 3500;
-  precioVip = 5500;
-
-  ngOnInit() {
-    this.generarMapaButacas();
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
   }
 
   private generarMapaButacas() {
@@ -209,12 +87,8 @@ export class Reserva implements OnInit {
               numero: 0,
               tipo: 'ESPACIO',
               estado: 'LIBRE',
-<<<<<<< HEAD
               precio: 0,
               bloque: bloqueIdx
-=======
-              precio: 0
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
             });
           } else {
             bloque.push({
@@ -223,12 +97,8 @@ export class Reserva implements OnInit {
               numero: numActual,
               tipo: tipo,
               estado: 'LIBRE',
-<<<<<<< HEAD
               precio: precio,
               bloque: bloqueIdx
-=======
-              precio: precio
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
             });
             numActual++;
           }
@@ -238,24 +108,17 @@ export class Reserva implements OnInit {
 
       mapa.push({
         letra,
-<<<<<<< HEAD
         butacas: [
           ...armarBloque(4, 0),
           ...armarBloque(20, 1),
           ...armarBloque(4, 2)
         ]
-=======
-        bloqueIzq: armarBloque(4, 1),
-        bloqueCen: armarBloque(20, 2),
-        bloqueDer: armarBloque(4, 3)
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
       });
     });
 
     this.filasCine.set(mapa);
   }
 
-<<<<<<< HEAD
   private async cargarButacasOcupadas() {
     const funcionId = this.carritoService.funcionId(); 
     if (!funcionId) return;
@@ -300,8 +163,6 @@ export class Reserva implements OnInit {
     });
   }
 
-=======
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
   toggleButaca(butaca: Butaca) {
     if (butaca.tipo === 'ESPACIO' || butaca.estado === 'OCUPADA') return;
 
@@ -313,7 +174,6 @@ export class Reserva implements OnInit {
       this.butacasSeleccionadas.update(b => b.filter(item => item.id !== butaca.id));
     }
   }
-<<<<<<< HEAD
 
   estaSeleccionada(id: string): boolean {
     return this.butacasSeleccionadas().some(b => b.id === id);
@@ -323,6 +183,4 @@ export class Reserva implements OnInit {
     this.carritoService.guardasReservaButacas(this.butacasSeleccionadas(), this.id());
     this.router.navigate(['/candy']);
   }
-=======
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 }

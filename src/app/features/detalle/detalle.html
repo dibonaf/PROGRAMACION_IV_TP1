@@ -9,41 +9,22 @@
           <p class="sinopsis">{{ p.sinopsis }}</p>
           
           <div class="funciones-info">
-<<<<<<< HEAD
             <p class="meta">Horarios disponibles:</p>
-=======
-            <p class="meta">Horarios programados:</p>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
             
             @if (loadingFunciones()) {
               <p class="loading">Buscando horarios...</p>
             }
 
-<<<<<<< HEAD
             <div class="lista-funciones-preview">
               @for (funcion of funciones(); track funcion.id) {
                 <span class="tag-horario">{{ funcion.hora.substring(0, 5) }}hs ({{ funcion.idioma }} - {{ funcion.formato }})</span>
               } @empty {
                 <p class="sin-funciones">No hay funciones programadas.</p>
-=======
-            <div class="lista-funciones">
-              @for (funcion of funciones(); track funcion.id) {
-                <div class="badge-funcion">
-                  <span class="fecha-hora">{{ funcion.fecha }} | {{ funcion.hora.substring(0, 5) }}hs</span>
-                  <span class="tags">{{ funcion.idioma }} - {{ funcion.formato }}</span>
-                </div>
-              } @empty {
-                <p class="sin-funciones">No hay funciones programadas para esta película en este momento.</p>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
               }
             </div>
           </div>
           
-<<<<<<< HEAD
           <button class="btn-comprar" [routerLink]="['/horarios', p.id]">Comprar Entradas</button>
-=======
-          <button class="btn-comprar" [routerLink]="['/reserva', p.id]">Comprar Entradas</button>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
         </div>
       </div>
     </div>

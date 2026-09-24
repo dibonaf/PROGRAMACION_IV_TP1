@@ -1,13 +1,4 @@
 <section class="contenedor">
-<<<<<<< HEAD
-=======
-  <h2>Candy Bar</h2>
-  
-  @if (loading()) {
-    <p class="loading">Preparando el pochoclo...</p>
-  }
-
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
   <div class="grilla-candy">
     @for (producto of productos(); track producto.id) {
       <article class="candy-card">
@@ -16,7 +7,6 @@
           <h3>{{ producto.nombre }}</h3>
           <p class="descripcion">{{ producto.descripcion }}</p>
           <p class="precio">${{ producto.precio }}</p>
-<<<<<<< HEAD
           <button class="btn-agregar" (click)="agregar(producto)">
             @if (getCantidad(producto.id) > 0) {
               Agregar otro ({{ getCantidad(producto.id) }})
@@ -24,16 +14,12 @@
               Agregar al carrito
             }
           </button>
-=======
-          <button class="btn-agregar">Agregar al carrito</button>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
         </div>
       </article>
     } @empty {
       <p>No hay productos disponibles en este momento.</p>
     }
   </div>
-<<<<<<< HEAD
 </section>
 
 @if (itemsEnCarrito().length > 0 || tieneEntradas()) {
@@ -52,6 +38,3 @@
     }
   </div>
 }
-=======
-</section>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932

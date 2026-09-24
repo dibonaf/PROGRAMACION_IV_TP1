@@ -12,7 +12,6 @@
   <div class="buscador">
     <input type="text" placeholder="Buscar película o género..." (input)="onSearch($event)">
   </div>
-<<<<<<< HEAD
   <div class="header-auth-section">
   @if (usuario()) {
     <div class="usuario-logueado">
@@ -23,16 +22,4 @@
     <button class="btn-login" routerLink="/login">Iniciar Sesión</button>
   }
 </div>
-=======
-  <div class="auth-section">
-    @if (usuario(); as user) {
-      <div class="user-menu">
-        <span class="user-name">Hola, {{ user.user_metadata['preferred_username'] || 'Cinéfilo' }}</span>
-        <button class="btn-logout" (click)="logout()">Salir</button>
-      </div>
-    } @else {
-      <button class="btn-login" (click)="login()">Iniciar Sesión</button>
-    }
-  </div>
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 </header>

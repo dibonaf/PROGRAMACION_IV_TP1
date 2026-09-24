@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 .contenedor {
   padding-bottom: 120px; 
 }
 
-=======
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 .grilla-candy {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -66,7 +63,6 @@
 
 .btn-agregar:hover {
   background-color: #b90710;
-<<<<<<< HEAD
 }
 
 .btn-saltar {
@@ -137,6 +133,4 @@
 
 .btn-continuar:hover {
   background-color: #b90710;
-=======
->>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 }
