@@ -9,11 +9,15 @@ export class AuthService {
   private supabase: SupabaseClient;
   
   currentUser = signal<User | null>(null);
+<<<<<<< HEAD
   perfilUsuario = signal<any | null>(null); 
+=======
+>>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
 
   constructor() {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     
+<<<<<<< HEAD
     this.inicializarSesion();
   }
 
@@ -83,6 +87,13 @@ export class AuthService {
   }
 
 
+=======
+    this.supabase.auth.onAuthStateChange((event, session) => {
+      this.currentUser.set(session?.user ?? null);
+    });
+  }
+
+>>>>>>> dd353f88c2568e632f65da6739f2cef512c25932
   async loginConGitHub() {
     const { error } = await this.supabase.auth.signInWithOAuth({
       provider: 'github'
