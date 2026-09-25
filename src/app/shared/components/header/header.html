@@ -12,9 +12,22 @@
   <div class="buscador">
     <input type="text" placeholder="Buscar película o género..." (input)="onSearch($event)">
   </div>
-  <div class="header-auth-section">
+ <div class="header-auth-section">
   @if (usuario()) {
     <div class="usuario-logueado">
+      
+      <!-- BOTÓN EXCLUSIVO PARA ADMINS/EMPLEADOS -->
+      @if (perfil()?.rol === 'admin' || perfil()?.rol === 'empleado') {
+        <button class="btn-logout" routerLink="/validacion-qr" style="border-color: #38bdf8; color: #38bdf8; margin-right: 1rem;">
+          Validar Entradas
+        </button>
+      }
+
+      <!-- BOTÓN DE HISTORIAL PARA TODOS LOS LOGUEADOS -->
+      <button class="btn-logout" routerLink="/mis-entradas" style="margin-right: 1rem;">
+        Mis Entradas
+      </button>
+
       <span class="saludo">Hola, {{ perfil()?.nombre || 'Cinéfilo' }}</span>
       <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
     </div>
@@ -22,4 +35,3 @@
     <button class="btn-login" routerLink="/login">Iniciar Sesión</button>
   }
 </div>
-</header>

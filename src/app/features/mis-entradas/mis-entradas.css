@@ -1,0 +1,99 @@
+.historial-container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h2 {
+  color: var(--cine-dorado, #d4af37);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mensaje {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.btn-rojo {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.grilla-entradas {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ticket-card {
+  display: flex;
+  background-color: #151b26;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.ticket-info {
+  flex: 2;
+  padding: 1.5rem;
+  border-right: 2px dashed #334155;
+}
+
+.ticket-info h3 {
+  margin: 0 0 1rem 0;
+  color: white;
+}
+
+.ticket-codigo {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.codigo-id {
+  font-family: monospace;
+  font-size: 1.1rem;
+  color: #38bdf8;
+  background-color: #0f172a;
+  padding: 0.5rem;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background-color: #475569;
+  color: white;
+  margin-top: 1rem;
+}
+
+.badge.pendiente {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid #22c55e;
+}
+
+/* Efecto opaco para las entradas ya usadas */
+.ticket-card.usada {
+  opacity: 0.6;
+}
+.ticket-card.usada .codigo-id {
+  color: #94a3b8;
+  text-decoration: line-through;
+}

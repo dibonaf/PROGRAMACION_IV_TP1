@@ -1,0 +1,91 @@
+.validador-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 2rem;
+}
+
+.validador-box {
+  background-color: #151b26;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.validador-box h2 {
+  color: var(--cine-dorado, #d4af37);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.instruccion {
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.input-grupo input {
+  width: 100%;
+  background-color: #1e293b;
+  border: 2px solid #475569;
+  color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  text-align: center;
+  outline: none;
+  font-family: monospace;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.input-grupo input:focus {
+  border-color: #38bdf8;
+}
+
+.btn-validar {
+  width: 100%;
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-validar:hover:not(:disabled) {
+  background-color: #b20710;
+}
+
+.btn-validar:disabled {
+  background-color: #475569;
+  cursor: not-allowed;
+}
+
+.mensaje-alerta {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.mensaje-alerta.exito {
+  background-color: rgba(34, 197, 94, 0.1);
+  border: 1px solid #22c55e;
+  color: #22c55e;
+}
+
+.mensaje-alerta.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}

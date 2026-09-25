@@ -2,6 +2,8 @@ import { Component, inject, computed, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarritoService } from '../../core/services/carrito.service';
 import { SupabaseService } from '../../core/services/supabase';
+import { AuthService } from '../../core/services/auth.service';
+
 
 
 
@@ -14,6 +16,7 @@ export class Checkout {
   private carritoService = inject(CarritoService);
   private router = inject(Router);
   private supabaseService = inject (SupabaseService);
+  private authService = inject (AuthService);
 
   butacas = this.carritoService.butacasSeleccionadas;
   candy = this.carritoService.itemsCandy;
@@ -54,7 +57,7 @@ export class Checkout {
     try {
       const nuevaVenta = {
         funcion_id: this.carritoService.funcionId(),
-        email_cliente: 'prueba1234@gmail.com', // Dato temporal hasta que conectes el Auth real
+        email_cliente: this.authService.currentUser()?.email,
         total: this.totalFinal(),
         detalle_butacas: this.butacas(), 
         detalle_candy: this.candy(),

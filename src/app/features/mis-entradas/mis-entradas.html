@@ -1,0 +1,36 @@
+<section class="historial-container">
+  <h2>Mis Entradas</h2>
+
+  @if (cargando()) {
+    <p class="mensaje">Cargando tu historial cinematográfico...</p>
+  } @else if (entradas().length === 0) {
+    <div class="sin-entradas">
+      <p class="mensaje">Todavía no tenés entradas en tu historial.</p>
+      <button routerLink="/cartelera" class="btn-rojo">Ver Cartelera</button>
+    </div>
+  } @else {
+    <div class="grilla-entradas">
+      @for (entrada of entradas(); track entrada.id) {
+        <div class="ticket-card" [class.usada]="entrada.estado === 'UTILIZADA'">
+          
+          <div class="ticket-info">
+            <h3>Entrada Cine UTN</h3>
+            <p><strong>Fecha de compra:</strong> {{ entrada.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
+            <span class="badge" [class.pendiente]="entrada.estado === 'PENDIENTE'">
+              {{ entrada.estado }}
+            </span>
+          </div>
+
+          <div class="ticket-codigo">
+            <p class="instruccion">Código de Ingreso:</p>
+            <p class="codigo-id">{{ entrada.id }}</p>
+            @if (entrada.estado === 'PENDIENTE') {
+              <small>Mostrale este código al empleado en la puerta</small>
+            }
+          </div>
+
+        </div>
+      }
+    </div>
+  }
+</section>

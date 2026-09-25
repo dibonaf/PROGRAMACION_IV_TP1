@@ -1,1 +1,28 @@
-<p>validacion-qr works!</p>
+<section class="validador-container">
+  <div class="validador-box">
+    <h2>Control de Acceso</h2>
+    <p class="instruccion">Ingresá el código de reserva del cliente o escaneá el QR</p>
+
+    <form (submit)="verificarEntrada($event)">
+      <div class="input-grupo">
+        <input 
+          type="text" 
+          placeholder="Ej: d8e5-4f32-..." 
+          [value]="codigoEntrada()"
+          (input)="onInputCodigo($event)"
+          [disabled]="procesando()"
+          autocomplete="off">
+      </div>
+
+      <button type="submit" class="btn-validar" [disabled]="procesando() || !codigoEntrada()">
+        {{ procesando() ? 'Verificando...' : 'Validar Entrada' }}
+      </button>
+    </form>
+
+    @if (mensaje().tipo) {
+      <div class="mensaje-alerta" [class.exito]="mensaje().tipo === 'exito'" [class.error]="mensaje().tipo === 'error'">
+        {{ mensaje().texto }}
+      </div>
+    }
+  </div>
+</section>

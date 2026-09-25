@@ -73,4 +73,43 @@ export class SupabaseService {
     removerCanal(canal: any) {
         this.supabase.removeChannel(canal);
     }
+
+    async validarEntrada(codigoReserva: string){
+        const { data: reserva, error: searchError } = await this.supabase
+        .from('ventas')
+        .select('*')
+        .eq('id', codigoReserva)
+        .single();
+
+        if (searchError || !reserva){
+            throw new Error('No se encontró ninguna reserva con ese codigo.');
+        }
+        if (reserva.estado === 'UTILIZADA') {
+            throw new Error('Esta entrada YA FUE UTILIZADA previamente.');
+        }
+
+        const { data, error: updateError } = await this.supabase
+        .from('ventas')
+        .update({ estado : 'UTILIZADA' })
+        .eq('id', codigoReserva)
+        .select();
+
+        if (updateError) {
+            throw new Error('Error al actualizar el estado de la entrada');
+        }
+        return data;
+    }
+
+    async obtenerMisEntradas(usuarioEmail: string) {
+        const { data, error } = await this.supabase
+        .from('ventas')
+        .select('*')
+        .eq('email_cliente', usuarioEmail)
+        .order('created_qr', { ascending: false });
+
+        if (error) {
+            throw new Error('Error al cargar el historial de entradas.');
+        }
+        return data;
+    }
 }
