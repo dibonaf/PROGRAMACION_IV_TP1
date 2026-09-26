@@ -45,6 +45,7 @@ export class Reserva implements OnInit, OnDestroy {
   private realtimeChannel: any;
 
   async ngOnInit() {
+    await this.configurarPreciosDinamicos();
     this.generarMapaButacas();
     await this.cargarButacasOcupadas();
     this.activarTiempoReal();
@@ -120,7 +121,7 @@ export class Reserva implements OnInit, OnDestroy {
   }
 
   private async cargarButacasOcupadas() {
-    const funcionId = this.carritoService.funcionId(); 
+    const funcionId = this.id(); 
     if (!funcionId) return;
 
     const ventas = await this.supabaseService.getButacasOcupadas(funcionId);
@@ -142,7 +143,7 @@ export class Reserva implements OnInit, OnDestroy {
   }
 
   private activarTiempoReal() {
-    const funcionId = this.carritoService.funcionId();
+    const funcionId = this.id();
     if (!funcionId) return;
 
     this.realtimeChannel = this.supabaseService.escucharVentasEnVivo((payload) => {
@@ -182,5 +183,46 @@ export class Reserva implements OnInit, OnDestroy {
   continuarCompra() {
     this.carritoService.guardasReservaButacas(this.butacasSeleccionadas(), this.id());
     this.router.navigate(['/candy']);
+  }
+
+  private async configurarPreciosDinamicos() {
+    const funcionId = this.id();
+    if (!funcionId) return;
+
+    this.precioBase = 3500;
+    this.precioVip = 5500;
+
+    try {
+      const { data: funcion } = await this.supabaseService.client
+        .from('funciones')
+        .select('*')
+        .eq('id', funcionId)
+        .single();
+
+      if (funcion && funcion.pelicula_id) {
+        const { data: pelicula } = await this.supabaseService.client
+          .from('peliculas')
+          .select('*')
+          .eq('id', funcion.pelicula_id)
+          .single();
+
+        if (pelicula && pelicula.fecha_estreno) {
+          const hoyStr = new Date().toISOString().split('T')[0];
+          
+          console.log('Fecha de hoy:', hoyStr);
+          console.log('Fecha de estreno:', pelicula.fecha_estreno);
+
+          if (hoyStr < pelicula.fecha_estreno) {
+            this.precioBase = this.precioBase * 0.75;
+            this.precioVip = this.precioVip * 0.75;
+            console.log('¡Descuento aplicado! Nuevo precio base:', this.precioBase);
+          } else {
+            console.log('La película ya se estrenó, se cobra precio normal.');
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error calculando el descuento de preventa:', error);
+    }
   }
 }

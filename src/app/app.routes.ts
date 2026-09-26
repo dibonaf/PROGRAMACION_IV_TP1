@@ -10,6 +10,7 @@ import { Login } from './features/login/login';
 import { roleGuard } from './core/guards/role.guard';
 import { ValidacionQr } from './features/validacion-qr/validacion-qr';
 import { MisEntradas } from './features/mis-entradas/mis-entradas';
+import { Preventas } from './features/preventas/preventas';
 
 
 
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'horarios/:id', component: Horarios},
     { path: 'login', component: Login},
     { path: 'validacion-qr', component: ValidacionQr, canActivate: [roleGuard] },
-    { path:'mis-entradas', component: MisEntradas },
+    { path: 'mis-entradas', component: MisEntradas },
+    { path: 'preventas', component: Preventas},
     { path: '**', redirectTo: ''}
 ];

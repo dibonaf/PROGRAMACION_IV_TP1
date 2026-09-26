@@ -34,6 +34,24 @@ export class CarritoService {
     });
   }
 
+  removerProducto(productoId: number) {
+    this.itemsCandy.update(items => {
+      const itemExistente = items.find(item => item.producto.id === productoId);
+      
+      if (!itemExistente) return items;
+
+      if (itemExistente.cantidad > 1) {
+        return items.map(item => 
+          item.producto.id === productoId 
+            ? { ...item, cantidad: item.cantidad - 1 } 
+            : item
+        );
+      } else {
+        return items.filter(item => item.producto.id !== productoId);
+      }
+    });
+  }
+
   obtenerCantidad (productoId: number): number {
     const item = this.itemsCandy().find(i => i.producto.id === productoId);
     return item ? item.cantidad : 0;

@@ -50,39 +50,27 @@ h2 { color: var(--text-primary); margin-bottom: 2rem; border-bottom: 1px solid #
 .monto-neto { font-size: 1.5rem; font-weight: bold; border-top: 2px solid #333; padding-top: 1.5rem; margin-bottom: 1.5rem; }
 .monto-neto span { color: var(--cine-dorado); }
 
-.btn-pagar, .btn-volver {
-  width: 100%; padding: 1rem; background-color: var(--cine-rojo); color: white;
-  border: none; border-radius: 4px; font-weight: bold; font-size: 1.1rem; cursor: pointer;
-}
-.btn-pagar:hover { background-color: #b90710; }
-
-.ticket-exito { text-align: center; padding: 3rem 1rem; }
-.ticket-exito h2 { color: var(--cine-dorado); border: none; }
-.qr-box { background: white; padding: 1rem; display: inline-block; border-radius: 8px; margin: 2rem 0; }
-.mensaje-final { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; }
-
-.tarjeta-pago-container {
-  background-color: #151b26;
+.caja-pago {
+  background-color: #151b26; 
   border: 1px solid #334155;
   border-radius: 8px;
-  padding: 2rem;
-  margin-top: 2rem;
-  max-width: 400px;
-  width: 100%;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-.tarjeta-pago-container h3 {
+.titulo-pago {
+  color: #d4af37; 
+  font-size: 1.2rem;
   margin-top: 0;
-  color: var(--cine-dorado, #d4af37);
-  border-bottom: 1px solid #334155;
-  padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+  border-bottom: 1px dashed #334155;
+  padding-bottom: 0.8rem;
 }
 
-.form-grupo {
+.form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .form-fila {
@@ -90,57 +78,53 @@ h2 { color: var(--text-primary); margin-bottom: 2rem; border-bottom: 1px solid #
   gap: 1rem;
 }
 
-.form-grupo label {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  margin-bottom: 0.3rem;
+.form-fila .form-group {
+  flex: 1;
+  margin-bottom: 0;
 }
 
-.form-grupo input {
-  background-color: #1e293b;
-  border: 1px solid #475569;
+.form-group label {
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.input-pago {
+  background-color: #0f172a; 
+  border: 1px solid #334155;
   color: white;
-  padding: 0.8rem;
-  border-radius: 4px;
-  font-family: monospace;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-family: monospace; 
   font-size: 1rem;
   outline: none;
+  transition: all 0.2s ease;
 }
 
-.form-grupo input:focus {
-  border-color: #38bdf8;
+.input-pago::placeholder {
+  color: #475569;
+}
+
+.input-pago:focus {
+  border-color: #38bdf8; 
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
 }
 
-.btn-pagar {
-  width: 100%;
-  background-color: #e50914;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  cursor: pointer;
+.btn-pagar, .btn-volver {
+  width: 100%; padding: 1rem; background-color: var(--cine-rojo); color: white;
+  border: none; border-radius: 4px; font-weight: bold; font-size: 1.1rem; cursor: pointer;
   margin-top: 1rem;
-  transition: background-color 0.2s;
 }
+
+.btn-pagar:hover, .btn-volver:hover { background-color: #b90710; }
 
 .btn-pagar:disabled {
   background-color: #555;
   cursor: not-allowed;
 }
 
-.ticket-exito {
-  text-align: center;
-  padding: 3rem;
-  background-color: rgba(34, 197, 94, 0.1);
-  border: 1px solid #22c55e;
-  border-radius: 8px;
-  margin-top: 2rem;
-}
-
-.ticket-exito h2 {
-  color: #22c55e;
-  margin-top: 0;
-}
+.ticket-exito { text-align: center; padding: 3rem 1rem; }
+.ticket-exito h2 { color: var(--cine-dorado); border: none; }
+.qr-box { background: white; padding: 1rem; display: inline-block; border-radius: 8px; margin: 2rem 0; }
+.mensaje-final { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; }

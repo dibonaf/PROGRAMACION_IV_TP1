@@ -7,13 +7,18 @@
           <h3>{{ producto.nombre }}</h3>
           <p class="descripcion">{{ producto.descripcion }}</p>
           <p class="precio">${{ producto.precio }}</p>
-          <button class="btn-agregar" (click)="agregar(producto)">
-            @if (getCantidad(producto.id) > 0) {
-              Agregar otro ({{ getCantidad(producto.id) }})
-            } @else {
+          
+          @if (getCantidad(producto.id) > 0) {
+            <div class="control-cantidad">
+              <button class="btn-restar" (click)="quitar(producto)">-</button>
+              <span class="cantidad-actual">{{ getCantidad(producto.id) }}</span>
+              <button class="btn-sumar" (click)="agregar(producto)">+</button>
+            </div>
+          } @else {
+            <button class="btn-agregar" (click)="agregar(producto)">
               Agregar al carrito
-            }
-          </button>
+            </button>
+          }
         </div>
       </article>
     } @empty {
@@ -27,7 +32,7 @@
     <div class="info-resumen">
       <p>Productos en el carrito: {{ itemsEnCarrito().length }}</p>
       @if (itemsEnCarrito().length > 0) {
-        <button class="btn-secundario" (click)="limpiarCandy()">Vaciar combos</button>
+        <button class="btn-secundario" (click)="limpiarCandy()">Vaciar carrito</button>
       }
     </div>
     

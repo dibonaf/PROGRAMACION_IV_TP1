@@ -100,16 +100,77 @@ export class SupabaseService {
         return data;
     }
 
-    async obtenerMisEntradas(usuarioEmail: string) {
-        const { data, error } = await this.supabase
-        .from('ventas')
-        .select('*')
-        .eq('email_cliente', usuarioEmail)
-        .order('created_qr', { ascending: false });
+    async obtenerMisEntradas(email: string) {
+        const { data: ventas, error: ventasError } = await this.supabase
+            .from('ventas')
+            .select('*')
+            .eq('email_cliente', email)
+            .order('created_at', { ascending: false });
+
+        if (ventasError || !ventas) {
+            console.error('Error cargando las ventas base:', ventasError);
+            return [];
+        }
+
+        const entradasCompletas = await Promise.all(ventas.map(async (venta) => {
+            let datosFuncion = null;
+            let datosPelicula = null;
+
+            if (venta.funcion_id) {
+                const { data: funcion } = await this.supabase
+                    .from('funciones')
+                    .select('*')
+                    .eq('id', venta.funcion_id)
+                    .single();
+                
+                datosFuncion = funcion;
+
+                if (funcion && funcion.pelicula_id) {
+                    const { data: pelicula } = await this.supabase
+                        .from('peliculas')
+                        .select('*')
+                        .eq('id', funcion.pelicula_id)
+                        .single();
+                        
+                    datosPelicula = pelicula;
+                }
+            }
+
+            return {
+                ...venta,
+                funciones: {
+                    fecha: datosFuncion?.fecha,
+                    peliculas: datosPelicula
+                }
+            };
+        }));
+
+        return entradasCompletas;
+    }
+
+   async getPreventas() {
+        const { data: peliculas, error } = await this.supabase
+            .from('peliculas')
+            .select('*');
 
         if (error) {
-            throw new Error('Error al cargar el historial de entradas.');
+            console.error('Error cargando películas:', error);
+            return [];
         }
-        return data;
+
+        const hoy = new Date();
+        const limite = new Date();
+        limite.setDate(hoy.getDate() + 7);
+
+        const hoyStr = hoy.toISOString().split('T')[0];
+        const limiteStr = limite.toISOString().split('T')[0];
+
+        const preventasActivas = peliculas.filter(pelicula => {
+            if (!pelicula.fecha_estreno) return false;
+            
+            return pelicula.fecha_estreno > hoyStr && pelicula.fecha_estreno <= limiteStr;
+        });
+
+        return preventasActivas;
     }
 }

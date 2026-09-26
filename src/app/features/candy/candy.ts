@@ -27,6 +27,10 @@ export class Candy implements OnInit{
     this.carritoService.agregarProducto(producto);
   }
 
+  quitar(producto: ProductoCandyModel) {
+    this.carritoService.removerProducto(producto.id);
+  }
+
   getCantidad(productoId: number): number {
     return this.carritoService.obtenerCantidad(productoId);
   }

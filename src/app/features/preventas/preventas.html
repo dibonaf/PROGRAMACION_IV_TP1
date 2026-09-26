@@ -1,0 +1,34 @@
+<section class="preventas-container">
+  <div class="header-preventas">
+    <h2>Preventas Exclusivas</h2>
+    <p>Asegurá tu lugar antes del estreno con un <strong>25% de descuento</strong>.</p>
+  </div>
+  
+  @if (cargando()) {
+    <p class="mensaje">Buscando preventas disponibles...</p>
+  } @else if (preventas().length === 0) {
+    <p class="mensaje">No hay preventas activas en este momento. ¡Revisá la cartelera!</p>
+  } @else {
+    <div class="grilla-preventas">
+      @for (pelicula of preventas(); track pelicula.id) {
+        <article class="preventa-card">
+          <div class="badge-descuento">25% OFF</div>
+          <img [src]="pelicula.poster_url" [alt]="pelicula.titulo">
+          
+          <div class="preventa-info">
+            <h3>{{ pelicula.titulo }}</h3>
+            
+            <div class="estreno-caja">
+              <span>ESTRENO</span>
+              <strong>{{ pelicula.fecha_estreno }}</strong>
+            </div>
+
+            <button class="btn-comprar" [routerLink]="['/pelicula', pelicula.id]">
+              Ver Funciones
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

@@ -1,5 +1,5 @@
 <section class="historial-container">
-  <h2>Mis Entradas</h2>
+  <h2>Mis Películas</h2>
 
   @if (cargando()) {
     <p class="mensaje">Cargando tu historial cinematográfico...</p>
@@ -13,15 +13,29 @@
       @for (entrada of entradas(); track entrada.id) {
         <div class="ticket-card" [class.usada]="entrada.estado === 'UTILIZADA'">
           
+          <div class="ticket-poster">
+            <img 
+              [src]="entrada.funciones?.peliculas?.poster_url" 
+              [alt]="entrada.funciones?.peliculas?.titulo">
+          </div>
+
           <div class="ticket-info">
-            <h3>Entrada Cine UTN</h3>
-            <p><strong>Fecha de compra:</strong> {{ entrada.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
-            <span class="badge" [class.pendiente]="entrada.estado === 'PENDIENTE'">
-              {{ entrada.estado }}
-            </span>
+            <div>
+              <h3>{{ entrada.funciones?.peliculas?.titulo || 'Entrada Cine UTN' }}</h3>
+              <p><strong>Función:</strong> {{ entrada.funciones?.fecha | date:'dd/MM/yyyy' }}</p>
+              <p><strong>Comprada:</strong> {{ entrada.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
+            </div>
+            
+            <div class="calificacion-caja">
+                <p>Tu calificación:</p>
+                <div class="estrellas">★ ★ ★ ★ ☆</div>
+            </div>
           </div>
 
           <div class="ticket-codigo">
+            <span class="badge" [class.pendiente]="entrada.estado === 'PENDIENTE'">
+              {{ entrada.estado }}
+            </span>
             <p class="instruccion">Código de Ingreso:</p>
             <p class="codigo-id">{{ entrada.id }}</p>
             @if (entrada.estado === 'PENDIENTE') {
