@@ -32,3 +32,58 @@
 } @else {
   <p class="loading">Cargando la magia del cine...</p>
 }
+<section class="resenas-section">
+  <div class="resenas-header">
+    <h3>Opiniones del Público</h3>
+    <div class="promedio-badge">
+      <span class="estrellas-amarillas">★</span> {{ promedio() }} / 5
+    </div>
+  </div>
+
+  <div class="nueva-resena-box">
+    <h4>Dejá tu calificación</h4>
+    
+    <div class="estrellas-selector">
+      @for (star of [1, 2, 3, 4, 5]; track $index) {
+        <button 
+          class="star-btn" 
+          [class.active]="star <= nuevaEstrellas()"
+          (click)="nuevaEstrellas.set(star)">
+          ★
+        </button>
+      }
+    </div>
+
+    <textarea 
+      placeholder="¿Qué te pareció la película?" 
+      [value]="nuevoComentario()"
+      (input)="nuevoComentario.set($any($event.target).value)"
+      rows="3">
+    </textarea>
+
+    <button class="btn-rojo" (click)="enviarResena()" [disabled]="enviandoResena()">
+      @if (enviandoResena()) { Procesando... } @else { Publicar Reseña }
+    </button>
+  </div>
+
+  <div class="lista-resenas">
+    @for (resena of resenas(); track resena.id) {
+      <div class="resena-card">
+        <div class="resena-meta">
+          <span class="usuario">{{ resena.email_usuario }}</span>
+          <span class="fecha">{{ resena.created_at | date:'dd/MM/yyyy' }}</span>
+        </div>
+        
+        <div class="estrellas-rating">
+          <span class="estrellas-amarillas">
+            {{ '★'.repeat(resena.estrellas) }}{{ '☆'.repeat(5 - resena.estrellas) }}
+          </span>
+        </div>
+        
+        <p class="comentario-texto">{{ resena.comentario }}</p>
+      </div>
+    } @empty {
+      <p class="sin-resenas">Todavía no hay reseñas. ¡Sé el primero en opinar!</p>
+    }
+  </div>
+</section>

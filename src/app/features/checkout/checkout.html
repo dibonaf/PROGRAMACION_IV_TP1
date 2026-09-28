@@ -45,39 +45,75 @@
           <p class="descuento-exito">¡Cupón aplicado! (-20%)</p>
         }
 
+        @if (usuarioActual() && puntosUsuario() > 0) {
+          <div style="margin: 1.5rem 0; padding: 1rem; background-color: #1e293b; border: 1px dashed #fbbf24; border-radius: 6px;">
+            <p style="color: #fbbf24; margin-top: 0; margin-bottom: 0.8rem; font-weight: bold;">
+              ⭐ Tenés {{ puntosUsuario() }} puntos disponibles
+            </p>
+            
+            @if (puntosAplicados() === 0) {
+              <button (click)="usarPuntos()" style="background: transparent; color: white; border: 1px solid #fbbf24; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; width: 100%;">
+                Usar saldo a favor
+              </button>
+            } @else {
+              <p style="color: #4caf50; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                ¡Se descontaron ${{ puntosAplicados() }} de tu total!
+              </p>
+              <button (click)="quitarPuntos()" style="background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">
+                Cancelar descuento
+              </button>
+            }
+          </div>
+        }
+
         <div class="monto-neto">
           Total Final: <span>${{ totalFinal() }}</span>
         </div>
 
-        <!-- Sección de Pago Simulado -->
         <div class="caja-pago">
           <h3 class="titulo-pago">Datos de Pago</h3>
-          <div class="form-group">
-            <label>Número de Tarjeta</label>
-            <input type="text" placeholder="0000 1111 2222 3333" class="input-pago" maxlength="19">
-          </div>
-          <div class="form-fila">
-            <div class="form-group">
-              <label>Vencimiento</label>
-              <input type="text" placeholder="MM/AA" class="input-pago" maxlength="5">
+
+          @if (!usuarioActual()) {
+            <div class="form-group form-email-anonimo">
+              <label>Correo Electrónico</label>
+              <input #emailInput type="email" placeholder="tu@email.com" class="input-pago" 
+                     (input)="emailAnonimo.set(emailInput.value)">
             </div>
+          }
+
+          @if (totalFinal() > 0) {
             <div class="form-group">
-              <label>CVC</label>
-              <input type="password" placeholder="***" class="input-pago" maxlength="4">
+              <label>Número de Tarjeta</label>
+              <input type="text" placeholder="0000 1111 2222 3333" class="input-pago" maxlength="19">
             </div>
-          </div>
+            <div class="form-fila">
+              <div class="form-group">
+                <label>Vencimiento</label>
+                <input type="text" placeholder="MM/AA" class="input-pago" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label>CVC</label>
+                <input type="password" placeholder="***" class="input-pago" maxlength="4">
+              </div>
+            </div>
+          } @else {
+            <p style="color: #4caf50; text-align: center; margin-bottom: 1rem;">
+              Tu compra está cubierta al 100% por tus puntos. No necesitás tarjeta.
+            </p>
+          }
           
           <button class="btn-pagar" 
                   (click)="simularPago()" 
                   [disabled]="procesandoPago()">
             @if (procesandoPago()) {
-              Procesando pago con el banco...
+              Procesando...
+            } @else if (totalFinal() === 0) {
+              Confirmar Canje Gratis
             } @else {
               Confirmar Pago de ${{ totalFinal() }}
             }
           </button>
         </div>
-
       </div>
     </div>
   } @else {

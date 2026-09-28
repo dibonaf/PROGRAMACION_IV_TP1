@@ -128,3 +128,26 @@ h2 { color: var(--text-primary); margin-bottom: 2rem; border-bottom: 1px solid #
 .ticket-exito h2 { color: var(--cine-dorado); border: none; }
 .qr-box { background: white; padding: 1rem; display: inline-block; border-radius: 8px; margin: 2rem 0; }
 .mensaje-final { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; }
+
+.form-email-anonimo {
+  margin-bottom: 1.5rem; 
+  padding-bottom: 1.5rem; 
+  border-bottom: 1px dashed #334155;
+}
+
+.btn-canjear {
+  background-color: #fbbf24; 
+  color: #1e293b; 
+  margin-top: 1rem;
+}
+
+.btn-canjear:hover {
+  background-color: #f59e0b;
+}
+
+.texto-puntos {
+  color: #94a3b8; 
+  font-size: 0.9rem; 
+  margin-top: 1rem; 
+  text-align: center;
+}

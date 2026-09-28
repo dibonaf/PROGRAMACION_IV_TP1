@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { environment } from "../../../environments/environment";
+import { single } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -173,4 +174,105 @@ export class SupabaseService {
 
         return preventasActivas;
     }
+
+    async obtenerTop3Peliculas() {
+      const { data: peliculas } = await this.supabase.from('peliculas').select('*');
+      const { data: funciones } = await this.supabase.from('funciones').select('id, pelicula_id');
+      const { data: ventas, error: ventasError } = await this.supabase.from('ventas').select('funcion_id, detalle_butacas');
+
+      if (ventasError) {
+         console.error('❌ Supabase bloqueó la lectura de ventas:', ventasError);
+      }
+      
+      console.log('✅ Cantidad de ventas recuperadas:', ventas?.length || 0);
+
+      if (!peliculas || !funciones || !ventas) {
+          return peliculas?.slice(0, 3) || [];
+      }
+
+      const ventasPorPelicula: { [peliculaId: number]: number } = {};
+
+      ventas.forEach(venta => {
+        const funcion = funciones.find(f => f.id === venta.funcion_id);
+        if (funcion) {
+          const cantidadEntradas = venta.detalle_butacas ? venta.detalle_butacas.length : 0;
+          ventasPorPelicula[funcion.pelicula_id] = (ventasPorPelicula[funcion.pelicula_id] || 0) + cantidadEntradas;
+        }
+      });
+
+      console.log('📊 Entradas vendidas por Película ID:', ventasPorPelicula);
+
+      const top3 = [...peliculas]
+        .sort((a, b) => (ventasPorPelicula[b.id] || 0) - (ventasPorPelicula[a.id] || 0))
+        .slice(0, 3); 
+
+      return top3;
+    }
+
+    async obtenerResenasPelicula(peliculaId: number) {
+        const { data, error} = await this.supabase
+        .from('resenas')
+        .select('*')
+        .eq('pelicula_id', peliculaId)
+        .order('created_at', { ascending: false});
+
+        if (error) {
+            console.error('Error al obtener reseñas;', error);
+            return { resenas: [], promedio: 0};            
+        }
+
+        const resenas = data || [];
+        let promedio = 0;
+
+        if (resenas.length > 0 ) {
+            const suma = resenas.reduce((acc, curr) => acc + curr.estrellas, 0);
+            promedio = suma / resenas.length;
+        }
+
+        return { resenas, promedio: promedio.toFixed(1) };
+    }
+
+    async guardarResena(peliculaId: number, email: string, estrellas: number, comentario: string) {
+      const { error } = await this.supabase
+        .from('resenas')
+        .insert([
+          { 
+            pelicula_id: peliculaId, 
+            email_usuario: email, 
+            estrellas: estrellas, 
+            comentario: comentario 
+          }
+        ]);
+
+      if (error) {
+        console.error('Error al guardar la reseña:', error);
+        throw error;
+      }
+    }
+
+    async obtenerPuntosUsuario(email: string) {
+        const { data, error } = await this.supabase
+        .from('perfiles')
+        .select('puntos')
+        .eq('email', email)
+        single();
+
+        if (error) {
+            console.error('Error al leer puntos:', error);
+            return 0;            
+        }
+        return (data as any)?.puntos || 0;
+    }
+
+    async actualizarPuntosUsuario(email: string, saldoActualizado: number) {
+    const { error } = await this.supabase
+      .from('perfiles')
+      .update({ puntos: saldoActualizado })
+      .eq('email', email);
+
+    if (error) {
+      console.error('Error al actualizar puntos:', error);
+      throw error;
+    }
+  }
 }
