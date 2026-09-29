@@ -8,6 +8,7 @@ import { Checkout } from './features/checkout/checkout';
 import { Horarios } from './features/horarios/horarios';
 import { Login } from './features/login/login';
 import { roleGuard } from './core/guards/role.guard';
+import { adminGuard } from './core/guards/admin-guard';
 import { ValidacionQr } from './features/validacion-qr/validacion-qr';
 import { MisEntradas } from './features/mis-entradas/mis-entradas';
 import { Preventas } from './features/preventas/preventas';
@@ -25,6 +26,7 @@ export const routes: Routes = [
     { path: 'horarios/:id', component: Horarios},
     { path: 'login', component: Login},
     { path: 'validacion-qr', component: ValidacionQr, canActivate: [roleGuard] },
+    { path: 'admin-panel', loadComponent: () => import('./features/admin-panel/admin-panel').then(m => m.AdminPanel), canActivate: [adminGuard] },
     { path: 'mis-entradas', component: MisEntradas },
     { path: 'preventas', component: Preventas},
     { path: '**', redirectTo: ''}

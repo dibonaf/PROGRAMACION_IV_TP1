@@ -1,0 +1,73 @@
+<div class="admin-layout">
+  <!-- Menú Lateral -->
+  <aside class="admin-sidebar">
+    <h2>Panel Admin</h2>
+    <nav>
+      <button 
+        [class.activo]="tabActivo() === 'reportes'" 
+        (click)="cambiarTab('reportes')">
+        📊 Reportes y Gráficos
+      </button>
+      <button 
+        [class.activo]="tabActivo() === 'cartelera'" 
+        (click)="cambiarTab('cartelera')">
+        🎬 Gestión Cartelera
+      </button>
+      <button 
+        [class.activo]="tabActivo() === 'logs'" 
+        (click)="cambiarTab('logs')">
+        📋 Log de Actividad
+      </button>
+    </nav>
+  </aside>
+
+  <main class="admin-content">
+    
+    @if (tabActivo() === 'reportes') {
+      <div class="header-seccion">
+        <h1>Reporte de Ventas</h1>
+        <div class="acciones-exportar">
+          <button class="btn-pdf" (click)="exportarPDF()">Exportar PDF</button>
+          <button class="btn-excel" (click)="exportarExcel()">Exportar Excel</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <h3>Facturación Total</h3>
+          @if (cargando()) {
+            <p class="valor">Calculando...</p>
+          } @else {
+            <p class="valor dorado">${{ totalFacturado() }}</p>
+          }
+        </div>
+        
+        <div class="kpi-card">
+          <h3>Entradas Vendidas</h3>
+          @if (cargando()) {
+            <p class="valor">Calculando...</p>
+          } @else {
+            <p class="valor">{{ entradasVendidas() }}</p>
+          }
+        </div>
+      </div>
+
+      <div class="graficos-container">
+        <div class="grafico-placeholder">
+          <p>Gráfico de Películas más vistas (Próximamente)</p>
+        </div>
+      </div>
+    }
+
+    @if (tabActivo() === 'cartelera') {
+      <h1>Gestión de Cartelera y Salas</h1>
+      <p>Acá pondremos la tabla para crear funciones y asignar salas automáticamente.</p>
+    }
+
+    @if (tabActivo() === 'logs') {
+      <h1>Log de Actividad del Sistema</h1>
+      <p>Acá se verá el registro de quién modificó qué cosa y a qué hora.</p>
+    }
+
+  </main>
+</div>
